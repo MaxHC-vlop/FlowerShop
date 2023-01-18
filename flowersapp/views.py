@@ -1,4 +1,4 @@
-from flowersapp.models import Consultation, Buyer
+from flowersapp.models import Bouquet, Consultation, Buyer
 
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
@@ -13,7 +13,8 @@ def card(request):
 
 
 def catalog(request):
-    return render(request, 'catalog.html')
+    bouquets = Bouquet.objects.all()
+    return render(request, context={"bouquets": bouquets}, template_name='catalog.html')
 
 
 @csrf_exempt
