@@ -78,8 +78,46 @@ class Bouquet(models.Model):
     )
 
     def __str__(self) -> str:
-        return self.name
+        return self.bouquet_name
 
     class Meta:
         verbose_name = 'Букет'
         verbose_name_plural = 'Букеты'
+
+
+class Order(models.Model):
+    buyer = models.ForeignKey(
+        'Buyer',
+        on_delete=models.CASCADE,
+        verbose_name='Покупатель',
+        related_name='buyers'
+    )
+    shop = models.ForeignKey(
+        'Shop',
+        on_delete=models.CASCADE,
+        verbose_name='Магазин',
+        related_name='shops'
+    )
+    bouquet = models.ForeignKey(
+        'Bouquet',
+        on_delete=models.CASCADE,
+        verbose_name='Букет',
+        related_name='bouquets'
+    )
+    is_consultation = models.BooleanField(
+        'Нужна ли консультация'
+    )
+    comment = models.TextField(
+        'Комментарий к заказу'
+    )
+    delivery_time = models.DateTimeField(
+        'Дата и время заказа'
+    )
+
+    def __str__(self) -> str:
+        order = f'{self.pk} {self.buyer.full_name}'
+        return order
+
+    class Meta:
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
