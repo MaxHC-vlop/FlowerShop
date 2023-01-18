@@ -57,10 +57,12 @@ class Buyer(models.Model):
     )
     address = models.TextField(
         'Адрес покупателя',
+        blank=True,
         db_index=True
     )
     email = models.EmailField(
         'Почта покупателя',
+        blank=True,
         db_index=True
     )
     phonenumber = models.CharField(
@@ -72,7 +74,7 @@ class Buyer(models.Model):
         'Consultation',
         on_delete=models.CASCADE,
         verbose_name='консультация',
-        related_name='сonsultations',
+        related_name='buyer',
         null=True
     )
     payment = models.ForeignKey(
