@@ -56,7 +56,7 @@ class Buyer(models.Model):
         db_index=True
     )
     address = models.TextField(
-        'Адрес квартиры',
+        'Адрес покупателя',
         db_index=True
     )
     email = models.EmailField(
