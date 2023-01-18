@@ -1,41 +1,19 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
 {% load static %}
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Flower Shop</title>
-	<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Unbounded:wght@700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="{% static 'css/main.css' %}">	
-</head>
-<body>
-	<div class="mainBg">
-		<header id="header">
-			<div class="container">
-				<div class="header ficb">
-					<a href="/"><img src="{% static 'img/logo.svg' %}" alt="logo" class="logo"></a>
-					<nav>
-						<ul class="menu ficc">
-							<li class="menu__item"><a href="#" class="menu__item_link">Каталог</a></li>
-							<li class="menu__item"><a href="#" class="menu__item_link">Рекомендации</a></li>
-							<li class="menu__item"><a href="#" class="menu__item_link">Контакты</a></li>
-						</ul>
-					</nav>
-				</div>
+
+<section id="banner">
+	<div class="container">
+		<div class="banner">
+			<div class="banner__block">
+				<h1 class="banner__title">Мастерская цветов</h1>
+				<p class="banner__text">Подберем для вас букет за два шага, который идеально подойдет под вашу ситуацию</p>
+				<button class="btn banner__btn">Подобрать букет</button>
 			</div>
-		</header>
-		<section id="banner">
-			<div class="container">
-				<div class="banner">
-					<div class="banner__block">
-						<h1 class="banner__title">Мастерская цветов</h1>
-						<p class="banner__text">Подберем для вас букет за два шага, который идеально подойдет под вашу ситуацию</p>
-						<button class="btn banner__btn">Подобрать букет</button>
-					</div>
-					<img src="{% static 'img/bannerImg.png' %}" alt="banner Img" class="banner__img">
-				</div>
-			</div>
-		</section>
+			<img src="{% static 'img/bannerImg.png' %}" alt="banner Img" class="banner__img">
+		</div>
+	</div>
+</section>
 	</div>
 	<section id="recommended">
 		<div class="container">
@@ -93,34 +71,17 @@
 			</div>
 		</div>
 	</section>
-	<section id="consultation">
-		<div class="container">
-			<div class="consultation">
-				<div class="title consultation__title">Оставьте заявку на консультацию</div>
-				<form action="#" class="consultation__form">
-					<input type="text" name="fname" class="consultation__form_input" placeholder="Введите Имя" required>
-					<input type="text" name="tel" class="consultation__form_input" placeholder="+ 7 (999) 000 00 00" required>
-					<button type="submit" class="consultation__form_btn">Отправить</button>
-				</form>
-			</div>
+<section id="consultation">
+	<div class="container">
+		<div class="consultation">
+			<div class="title consultation__title">Оставьте заявку на консультацию</div>
+			<form action="#" class="consultation__form">
+				<input type="text" name="fname" class="consultation__form_input" placeholder="Введите Имя" required>
+				<input type="text" name="tel" class="consultation__form_input" placeholder="+ 7 (999) 000 00 00" required>
+				<button type="submit" class="consultation__form_btn">Отправить</button>
+			</form>
 		</div>
-	</section>
-	<footer id="footer">
-		<div class="container">
-			<div class="footer">
-				<a href="/"><img src="{% static 'img/logo.svg' %}" alt="logo" class="logo footer__logo"></a>
-				<nav>
-					<ul class="menu footer__menu ficc">
-						<li class="menu__item"><a href="#" class="menu__item_link">Каталог</a></li>
-						<li class="menu__item"><a href="#" class="menu__item_link">Рекомендации</a></li>
-						<li class="menu__item"><a href="#" class="menu__item_link">Контакты</a></li>
-					</ul>
-				</nav>
-				<hr class="line"></hr>
-				<a href="#" class="footer__poli">Политика конфиденциальности</a>
-				<p class="footer_cop">©️2022. FlowerShop. Все права защищены</p>
-			</div>
-		</div>
-	</footer>
-</body>
-</html>
+	</div>
+</section>
+
+{% endblock %}
