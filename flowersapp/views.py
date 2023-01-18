@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Bouquet
 
 def index(request):
     return render(request, 'index.html')
@@ -7,7 +8,8 @@ def card(request):
     return render(request, 'card.html')
 
 def catalog(request):
-    return render(request, 'catalog.html')
+    bouquets = Bouquet.objects.all()
+    return render(request, context={"bouquets": bouquets}, template_name='catalog.html')
 
 def consultation(request):
     return render(request, 'consultation.html')
