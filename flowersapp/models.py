@@ -37,7 +37,7 @@ class Shop(models.Model):
     )
     store_photo = models.ImageField(
         'Фото магазина',
-        upload_to='images',
+        upload_to='media',
         db_index=True
     )
     address = models.TextField(
@@ -65,7 +65,7 @@ class Bouquet(models.Model):
     )
     bouquet_photo = models.ImageField(
         'Фото букета',
-        upload_to='images',
+        upload_to='media',
         db_index=True
     )
     price = models.FloatField(
