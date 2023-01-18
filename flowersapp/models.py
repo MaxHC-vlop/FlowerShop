@@ -1,6 +1,34 @@
 from django.db import models
 
 
+class Payment(models.Model):
+    сard_number = models.CharField(
+        'Номер карты',
+        max_length=200,
+        db_index=True
+    )
+    card_date = models.DateField(
+        'Срок годности карты',
+        db_index=True
+    )
+    owner_name = models.CharField(
+        'Имя и фамилия владельца',
+        max_length=200,
+        db_index=True
+    )
+    cvv = models.IntegerField(
+        'CVV карты',
+        db_index=True
+    )
+
+    def __str__(self) -> str:
+        return self.owner_name
+
+    class Meta:
+        verbose_name = 'Средтсво оплаты'
+        verbose_name_plural = 'Средтсва оплаты'
+
+
 class Consultation(models.Model):
     full_name = models.CharField(
         'ФИО покупателя',
