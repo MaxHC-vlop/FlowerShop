@@ -1,3 +1,7 @@
 from django.contrib import admin
+from flowersapp.models import Buyer
 
-# Register your models here.
+
+@admin.register(Buyer)
+class PlaceAdminModel(admin.ModelAdmin):
+    pass
