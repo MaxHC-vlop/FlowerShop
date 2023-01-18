@@ -68,6 +68,20 @@ class Buyer(models.Model):
         max_length=20,
         db_index=True
     )
+    сonsultation = models.ForeignKey(
+        'Consultation',
+        on_delete=models.CASCADE,
+        verbose_name='консультация',
+        related_name='сonsultations',
+        null=True
+    )
+    payment = models.ForeignKey(
+        'Payment',
+        on_delete=models.CASCADE,
+        verbose_name='Оплата',
+        related_name='payments',
+        null=True
+    )
 
     def __str__(self) -> str:
         return self.full_name
