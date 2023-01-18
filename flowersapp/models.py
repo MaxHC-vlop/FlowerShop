@@ -79,7 +79,7 @@ class Buyer(models.Model):
         'Payment',
         on_delete=models.CASCADE,
         verbose_name='Оплата',
-        related_name='payments',
+        related_name='buyer_payments',
         null=True
     )
 
@@ -166,8 +166,12 @@ class Order(models.Model):
         verbose_name='Букет',
         related_name='bouquets'
     )
-    is_consultation = models.BooleanField(
-        'Нужна ли консультация'
+    payment = models.ForeignKey(
+        'Payment',
+        on_delete=models.CASCADE,
+        verbose_name='Оплата',
+        related_name='order_payments',
+        null=True
     )
     comment = models.TextField(
         'Комментарий к заказу'
