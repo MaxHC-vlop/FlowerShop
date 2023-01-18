@@ -1,6 +1,26 @@
 from django.db import models
 
 
+class Consultation(models.Model):
+    full_name = models.CharField(
+        'ФИО покупателя',
+        max_length=200,
+        db_index=True
+    )
+    phonenumber = models.CharField(
+        'Номер телефона владельца',
+        max_length=20,
+        db_index=True
+    )
+
+    def __str__(self) -> str:
+        return self.full_name
+
+    class Meta:
+        verbose_name = 'Консультация'
+        verbose_name_plural = 'Консультации'
+
+
 class Buyer(models.Model):
     full_name = models.CharField(
         'ФИО покупателя',
