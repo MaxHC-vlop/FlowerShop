@@ -1,20 +1,22 @@
-from flowersapp.models import Bouquet, Consultation, Buyer
-
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
+
+from flowersapp.models import Bouquet, Buyer, Consultation
 
 
 def index(request):
-    return render(request, 'index.html')
+    recommended_bouquets = Bouquet.objects.filter(recommend=True)
+    return render(request, 'index.html', context={"bouquets": recommended_bouquets})
 
 
-def card(request):
-    return render(request, 'card.html')
+def card(request, bouquet_url):
+    bouquet = get_object_or_404(Bouquet, slug=bouquet_url)
+    return render(request, 'card.html', context={"bouquet": bouquet})
 
 
 def catalog(request):
     bouquets = Bouquet.objects.all()
-    return render(request, context={"bouquets": bouquets}, template_name='catalog.html')
+    return render(request, 'catalog.html', context={"bouquets": bouquets})
 
 
 @csrf_exempt

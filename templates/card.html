@@ -6,11 +6,11 @@
 		<div class="container">
 			<div class="card ficb">
 				<div class="card__block card__block_first">
-					<img src="{% static 'img/cardImg.jpg' %}" alt="img" class="card__img">
+					<img src="../{{ bouquet.bouquet_photo }}" alt="img" class="card__img">
 				</div>
 				<div class="card__block card__block_sec">
-					<div class="title">Летнее утро</div>
-					<div class="card__block_price">3 600 руб</div>
+					<div class="title">{{ bouquet.bouquet_name }}</div>
+					<div class="card__block_price">{{ bouquet.price }} руб</div>
 					<div class="card__elems ">
 						<span class="card__elems_intro">Состав</span>
 						<div class="card__items">

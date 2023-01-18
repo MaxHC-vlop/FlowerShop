@@ -16,7 +16,7 @@ class ShopAdminModel(admin.ModelAdmin):
 
 @admin.register(Bouquet)
 class BouquetAdminModel(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("bouquet_name", )}
 
 
 @admin.register(Order)

@@ -127,6 +127,12 @@ class Bouquet(models.Model):
         max_length=200,
         db_index=True
     )
+    slug = models.SlugField(
+        'URL',
+        max_length=200,
+        db_index=True,
+        unique=True
+    )
     description = models.TextField(
         'Описание букета',
         db_index=True,
@@ -150,6 +156,11 @@ class Bouquet(models.Model):
     price = models.FloatField(
         'Цена букета',
         db_index=True
+    )
+
+    recommend = models.BooleanField(
+        'Рекомендуем',
+        default=False
     )
 
     def __str__(self) -> str:

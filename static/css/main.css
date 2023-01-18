@@ -20,6 +20,8 @@ img {
 a, button {
 	cursor: pointer;
 	transition: all .2s ease;
+	text-decoration: none;
+	color: black;
 
 }
 input::placeholder {
