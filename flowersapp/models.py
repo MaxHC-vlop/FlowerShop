@@ -125,6 +125,21 @@ class Bouquet(models.Model):
         max_length=200,
         db_index=True
     )
+    description = models.TextField(
+        'Описание букета',
+        db_index=True,
+        blank=True
+    )
+    composition = models.TextField(
+        'Композиция букета',
+        db_index=True,
+        blank=True
+    )
+    size = models.TextField(
+        'Размер букета',
+        db_index=True,
+        blank=True
+    )
     bouquet_photo = models.ImageField(
         'Фото букета',
         upload_to='media',
