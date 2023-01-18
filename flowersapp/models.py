@@ -149,10 +149,6 @@ class Bouquet(models.Model):
         'Цена букета',
         db_index=True
     )
-    amount = models.IntegerField(
-        'Количество букетов в наличии',
-        db_index=True
-    )
 
     def __str__(self) -> str:
         return self.bouquet_name
