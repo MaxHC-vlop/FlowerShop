@@ -24,7 +24,7 @@
               {{ bouquet.size | safe }}
             </div>
           </div>
-          <form action="{% url 'order' %}">
+          <form action="{% url 'order' slug=bouquet.id %}">
             <button class="btn largeBtn card__btn">Заказать букет</button>
           </form>
         </div>

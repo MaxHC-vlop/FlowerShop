@@ -61,13 +61,14 @@ def consultation(request):
 
 
 @csrf_exempt
-def order(request):
+def order(request, slug):
     if request.method == "POST":
         full_name = request.POST.get('fname')
         phonenumber = request.POST.get('tel')
         address = request.POST.get('adres')
         delivery_time = request.POST.get('orderTime')
 
+        bouquet, created = Bouquet.objects.get_or_create(id=slug)
         buyer, created = Buyer.objects.get_or_create(
             phonenumber=phonenumber,
             defaults={
@@ -78,6 +79,7 @@ def order(request):
         Order.objects.create(
             buyer=buyer,
             delivery_time=delivery_time,
+            bouquet=bouquet
         )
     return render(request, 'order.html')
 
