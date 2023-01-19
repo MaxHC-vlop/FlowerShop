@@ -1,45 +1,47 @@
 {% extends 'base.html' %}
 {% block content %}
-{% load static %}
+  {% load static %}
 
-	<section id="card">
-		<div class="container">
-			<div class="card ficb">
-				<div class="card__block card__block_first">
-					<img src="../{{ bouquet.bouquet_photo }}" alt="img" class="card__img">
-				</div>
-				<div class="card__block card__block_sec">
-					<div class="title">{{ bouquet.bouquet_name }}</div>
-					<div class="card__block_price">{{ bouquet.price }} руб</div>
-					<div class="card__elems ">
-						<span class="card__elems_intro">Состав</span>
-						<div class="card_items_intro">
+  <section id="card">
+    <div class="container">
+      <div class="card ficb">
+        <div class="card__block card__block_first">
+          <img src="../{{ bouquet.bouquet_photo }}" alt="img" class="card__img">
+        </div>
+        <div class="card__block card__block_sec">
+          <div class="title">{{ bouquet.bouquet_name }}</div>
+          <div class="card__block_price">{{ bouquet.price }} руб</div>
+          <div class="card__elems ">
+            <span class="card__elems_intro">Состав</span>
+            <div class="card_items_intro">
               {{ bouquet.composition | safe }}
-						</div>
-					</div>
+            </div>
+          </div>
 
-					<div class="card__elems ">
-						<span class="card__elems_intro">Размер</span>
-						<div class="card_items_intro">
+          <div class="card__elems ">
+            <span class="card__elems_intro">Размер</span>
+            <div class="card_items_intro">
               {{ bouquet.size | safe }}
-						</div>
-					</div>
-					<button class="btn largeBtn card__btn">Заказать букет</button>
-				</div>
-			</div>
-		</div>
-	</section>
-	<section id="consultation">
-		<div class="container">
-			<div class="consultation">
-				<div class="title consultation__title">Оставьте заявку на консультацию</div>
-				<form action="#" class="consultation__form">
-					<input type="text" name="fname" class="consultation__form_input" placeholder="Введите Имя" required>
-					<input type="text" name="tel" class="consultation__form_input" placeholder="+ 7 (999) 000 00 00" required>
-					<button type="submit" class="consultation__form_btn">Отправить</button>
-				</form>
-			</div>
-		</div>
-	</section>
-	
+            </div>
+          </div>
+          <form action="{% url 'order' %}">
+            <button class="btn largeBtn card__btn">Заказать букет</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="consultation">
+    <div class="container">
+      <div class="consultation">
+        <div class="title consultation__title">Оставьте заявку на консультацию</div>
+        <form action="#" class="consultation__form">
+          <input type="text" name="fname" class="consultation__form_input" placeholder="Введите Имя" required>
+          <input type="text" name="tel" class="consultation__form_input" placeholder="+ 7 (999) 000 00 00" required>
+          <button type="submit" class="consultation__form_btn">Отправить</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
 {% endblock %}
