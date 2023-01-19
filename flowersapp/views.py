@@ -79,7 +79,7 @@ def order(request):
             buyer=buyer,
             delivery_time=delivery_time,
         )
-    return render(request, 'order-step.html')
+    return render(request, 'order.html')
 
 
 def order_step(request):
