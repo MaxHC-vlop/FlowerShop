@@ -3,6 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from flowersapp.models import Bouquet, Buyer
 from flowersapp.models import Consultation, Order
+from flowersapp.bot import main
 
 
 @csrf_exempt
@@ -22,6 +23,7 @@ def index(request):
             full_name=full_name,
             phonenumber=phonenumber,
         ).buyer.set([buyer])
+        main(full_name, phonenumber)
 
     return render(
         request, 'index.html', context={'bouquets': recommended_bouquets}
@@ -53,6 +55,7 @@ def consultation(request):
             full_name=full_name,
             phonenumber=phonenumber,
         ).buyer.set([buyer])
+        main(full_name, phonenumber)
 
     return render(request, 'consultation.html')
 
