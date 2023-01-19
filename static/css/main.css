@@ -110,15 +110,13 @@ input::placeholder {
 }
 .menu__item_link {
 	font-weight: 600;
-font-size: 10px;
-line-height: 145.02%;
+	font-size: 10px;
+	line-height: 145.02%;
 /* identical to box height, or 15px */
-
-text-transform: uppercase;
-
+	text-transform: uppercase;
 /* основной */
-text-decoration: none;
-color: #17CF97;
+	text-decoration: none;
+	color: #17CF97;
 }
 .banner {
 	padding-top: 174px;
@@ -142,21 +140,19 @@ color: #17CF97;
 .banner__text {
 	max-width: 423px;
 	font-size: 16px;
-line-height: 103.52%;
-/* or 17px */
+	line-height: 103.52%;
+	/* or 17px */
 
-
-/* серый */
-
-color: #ABABAB;
-margin-bottom: 50px;
+	/* серый */
+	color: #ABABAB;
+	margin-bottom: 50px;
 }
 .banner__img {
-/*	width: 794px;
-height: 825px;*/
-left: 47%;
-/*top: -38px;*/
-bottom: 0;
+	/*	width: 794px;
+	height: 825px;*/
+	left: 47%;
+	/*top: -38px;*/
+	bottom: 0;
 	position: absolute;
 
 }
@@ -166,21 +162,12 @@ bottom: 0;
 }
 .recommended__block {
 	display: flex;
-	width: 398px;
 	height: 400px;
 }
 .recommended__block:last-child {
 	margin-right: 0;
 }
-/*.recommended__block_first {*/
-/*	background: url('../img/recommendedBg1.jpg') no-repeat center bottom / cover;*/
-/*}*/
-/*.recommended__block_sec {*/
-/*	background: url('../img/recommendedBg2.jpg') no-repeat center bottom / cover;*/
-/*}*/
-/*.recommended__block_thr {*/
-/*	background: url('../img/recommendedBg3.jpg') no-repeat center bottom / cover;*/
-/*}*/
+
 .recommended__block_elems {
 	width: 100%;
 	padding: 15px;
@@ -326,30 +313,13 @@ opacity: 0.3;
 }
 
 
-/*catalog.html*/
-/*.catalog__block .recommended__elems {
-	flex-wrap: wrap;
-} */
+
 .catalog__block .recommended__elems {
-	/*margin-bottom: 10px;*/
+	display: grid;
+	grid-template-columns: minmax(250px, 398px) minmax(250px, 398px) minmax(250px, 398px);
 	gap: 10px;
-	flex-wrap: wrap;
 }
-/*.recommended__elems_first .recommended__block_sec {*/
-/*	background: url('../img/catalog/catalogBg1.jpg') no-repeat center bottom / cover;*/
-/*}*/
-/*.recommended__elems_first .recommended__block_thr {*/
-/*	background: url('../img/catalog/catalogBg2.jpg') no-repeat center bottom / cover;*/
-/*}*/
-/*.recommended__elems_sec .recommended__block_first {*/
-/*	background: url('../img/catalog/catalogBg3.jpg') no-repeat center bottom / cover;*/
-/*}*/
-/*.recommended__elems_sec .recommended__block_sec {*/
-/*	background: url('../img/catalog/catalogBg4.jpg') no-repeat center bottom / cover;*/
-/*}*/
 
-
-/*card.html*/
 .card {
 	padding-top: 50px;
 	padding-bottom: 100px;	
