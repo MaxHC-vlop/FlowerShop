@@ -72,14 +72,15 @@ def order(request, slug):
         buyer, created = Buyer.objects.get_or_create(
             phonenumber=phonenumber,
             defaults={
-                'full_name': full_name,
-                'address': address
+                'full_name': full_name
             },
         )
         Order.objects.create(
             buyer=buyer,
             delivery_time=delivery_time,
-            bouquet=bouquet
+            bouquet=bouquet,
+            price=bouquet.price,
+            address=address
         )
     return render(request, 'order.html')
 
