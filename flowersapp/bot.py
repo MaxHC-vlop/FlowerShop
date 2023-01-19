@@ -2,7 +2,7 @@ import telegram
 from environs import Env
 
 
-def main(name, number):
+def tg_send_message(name, number):
     env = Env()
     env.read_env()    
     tg_token = env.str('TG_BOT_TOKEN')
