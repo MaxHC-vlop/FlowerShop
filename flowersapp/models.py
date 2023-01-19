@@ -131,7 +131,7 @@ class Bouquet(models.Model):
         'URL',
         max_length=200,
         db_index=True,
-        unique=True
+        null=True,
     )
     description = models.TextField(
         'Описание букета',
@@ -150,7 +150,6 @@ class Bouquet(models.Model):
     )
     bouquet_photo = models.ImageField(
         'Фото букета',
-        upload_to='images',
         db_index=True
     )
     price = models.FloatField(
