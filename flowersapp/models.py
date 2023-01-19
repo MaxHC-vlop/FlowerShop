@@ -206,6 +206,10 @@ class Order(models.Model):
         max_length=200,
         db_index=True,
     )
+    is_active = models.BooleanField(
+        'Действующий заказ',
+        default=True
+    )
 
     def __str__(self) -> str:
         order = f'{self.pk} {self.buyer.full_name}'
