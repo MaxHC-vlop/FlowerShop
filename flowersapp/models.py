@@ -206,6 +206,11 @@ class Order(models.Model):
         max_length=200,
         db_index=True,
     )
+    price = models.FloatField(
+        'Стоимость заказа',
+        db_index=True,
+        null=True
+    )
     is_active = models.BooleanField(
         'Действующий заказ',
         default=True
