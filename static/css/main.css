@@ -314,7 +314,7 @@ opacity: 0.3;
 
 
 
-.catalog__block .recommended__elems {
+.recommended__elems {
 	display: grid;
 	grid-template-columns: minmax(250px, 398px) minmax(250px, 398px) minmax(250px, 398px);
 	gap: 10px;
