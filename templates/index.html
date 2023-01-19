@@ -25,7 +25,7 @@
             {% for bouquet in bouquets %}
               <a href="../catalog/{{ bouquet.slug }}">
                 <div class="recommended__block"
-                     style="background: url('../{{ bouquet.bouquet_photo | safe }}') no-repeat center bottom / cover">
+                     style="background: url('../media/{{ bouquet.bouquet_photo | safe }}') no-repeat center bottom / cover">
                   <div class="recommended__block_elems ficb">
                     <span class="recommended__block_intro">{{ bouquet.bouquet_name }}</span>
                     <span class="recommended__block_price">{{ bouquet.price }} руб</span>
