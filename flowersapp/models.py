@@ -156,7 +156,6 @@ class Bouquet(models.Model):
         'Цена букета',
         db_index=True
     )
-
     recommend = models.BooleanField(
         'Рекомендуем',
         default=False
@@ -175,19 +174,22 @@ class Order(models.Model):
         'Buyer',
         on_delete=models.CASCADE,
         verbose_name='Покупатель',
-        related_name='buyers'
+        related_name='buyers',
+        null=True
     )
     shop = models.ForeignKey(
         'Shop',
         on_delete=models.CASCADE,
         verbose_name='Магазин',
-        related_name='shops'
+        related_name='shops',
+        null=True
     )
     bouquet = models.ForeignKey(
         'Bouquet',
         on_delete=models.CASCADE,
         verbose_name='Букет',
-        related_name='bouquets'
+        related_name='bouquets',
+        null=True
     )
     payment = models.ForeignKey(
         'Payment',
@@ -199,8 +201,10 @@ class Order(models.Model):
     comment = models.TextField(
         'Комментарий к заказу'
     )
-    delivery_time = models.DateTimeField(
-        'Дата и время заказа'
+    delivery_time = models.CharField(
+        'Дата и время заказа',
+        max_length=200,
+        db_index=True,
     )
 
     def __str__(self) -> str:
