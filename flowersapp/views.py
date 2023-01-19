@@ -1,9 +1,9 @@
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
 
-from flowersapp.models import Bouquet, Buyer
-from flowersapp.models import Consultation, Order
 from flowersapp.bot import tg_send_message
+from flowersapp.models import Bouquet, BouquetQuiz, Buyer
+from flowersapp.models import Consultation, Order
 
 
 @csrf_exempt
@@ -27,7 +27,7 @@ def index(request):
 
     return render(
         request, 'index.html', context={'bouquets': recommended_bouquets}
-        )
+    )
 
 
 def card(request, bouquet_url):
@@ -89,13 +89,33 @@ def order_step(request):
     return render(request, 'order-step.html')
 
 
+@csrf_exempt
 def quiz(request):
     return render(request, 'quiz.html')
 
 
+@csrf_exempt
 def quiz_step(request):
     return render(request, 'quiz-step.html')
 
 
+def get_quiz_results(request):
+    if request.method == 'GET':
+        price = request.GET.get('price')
+        request_prev = request.META.get('HTTP_REFERER')
+        _, event = request_prev.split('?')
+        _, event_value = event.split('=')
+        return {
+            'event': event_value,
+            'price': price
+        }
+
+
+@csrf_exempt
 def result(request):
-    return render(request, 'result.html')
+    result = get_quiz_results(request)
+    bouquet_quiz = BouquetQuiz.objects.get(
+        answer_event=result['event'],
+        answer_price=result['price'])
+
+    return render(request, 'result.html', context={"bouquet": bouquet_quiz.bouquet})

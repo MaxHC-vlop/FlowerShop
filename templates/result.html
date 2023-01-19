@@ -29,10 +29,10 @@
 							</div>
 						</div>
 					</div>
-					<img src="{% static 'img/cardImg.jpg' %}" alt="result Img" class="result__block_img">
+					<img src="{% get_media_prefix %}{{ bouquet.bouquet_photo }}" alt="result Img" class="result__block_img">
 					<div class="result__items">
-						<div class="title result__items_title">Летнее утро</div>
-						<div class="result__items_price">3 600 руб</div>
+						<div class="title result__items_title">{{ bouquet.bouquet_name }}</div>
+						<div class="result__items_price">{{ bouquet.price }} руб</div>
 						<button class="btn result__items_btn">Заказать букет</button>
 						<hr class="result__items_line" />
 						<div class="result__items_intro">Хотите что-то более специальное?</div>
