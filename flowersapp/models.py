@@ -215,6 +215,11 @@ class Order(models.Model):
         'Действующий заказ',
         default=True
     )
+    address = models.TextField(
+        'Адрес доставки',
+        blank=True,
+        db_index=True
+    )
 
     def __str__(self) -> str:
         order = f'{self.pk} {self.buyer.full_name}'
