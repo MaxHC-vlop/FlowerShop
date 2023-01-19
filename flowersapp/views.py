@@ -3,9 +3,24 @@ from django.views.decorators.csrf import csrf_exempt
 
 from flowersapp.models import Bouquet, Buyer, Consultation
 
-
+@csrf_exempt
 def index(request):
     recommended_bouquets = Bouquet.objects.filter(recommend=True)
+
+    if request.method == "POST":
+        full_name = request.POST.get("fname")
+        phonenumber = request.POST.get("tel")
+    
+        buyer, created = Buyer.objects.get_or_create(
+            phonenumber=phonenumber, 
+            defaults={
+                'full_name': full_name},
+        )
+        Consultation.objects.create(
+            full_name=full_name,
+            phonenumber=phonenumber,
+        ).buyer.set([buyer])
+
     return render(request, 'index.html', context={"bouquets": recommended_bouquets})
 
 
@@ -21,19 +36,19 @@ def catalog(request):
 
 @csrf_exempt
 def consultation(request):
-    full_name = request.POST.get("fname")
-    phonenumber = request.POST.get("tel")
-
-    consultation = Consultation.objects.create(
-        full_name=full_name,
-        phonenumber=phonenumber
-    )
-
-    Buyer.objects.get_or_create(
-        full_name=full_name,
-        phonenumber=phonenumber,
-        сonsultation=consultation
-    )
+    if request.method == "POST":
+        full_name = request.POST.get("fname")
+        phonenumber = request.POST.get("tel")
+    
+        buyer, created = Buyer.objects.get_or_create(
+            phonenumber=phonenumber, 
+            defaults={
+                'full_name': full_name},
+        )
+        Consultation.objects.create(
+            full_name=full_name,
+            phonenumber=phonenumber,
+        ).buyer.set([buyer])             
 
     return render(request, 'consultation.html')
 
