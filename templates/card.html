@@ -13,42 +13,15 @@
 					<div class="card__block_price">{{ bouquet.price }} руб</div>
 					<div class="card__elems ">
 						<span class="card__elems_intro">Состав</span>
-						<div class="card__items">
-							<span class="card_items_intro">
-								Гортензия розовая - 1 шт.
-							</span>
-							<span class="card_items_intro">
-								Ветки эквалипта - 5 шт.
-							</span>
-							<span class="card_items_intro">
-								Гипсофила - 1 шт.
-							</span>
-							<span class="card_items_intro">
-								Матовая упаковка - 1 шт.
-							</span>
-							<span class="card_items_intro">
-								Лента атласная - 1 шт.
-							</span>
-							<span class="card_items_intro">
-								Рекомендация по уходу - 1 шт.
-							</span>
-							<span class="card_items_intro">
-								Открыточка с вашими пожеланиями - 1 шт.
-							</span>
-							<span class="card_items_intro">
-								Любовь флориста (бесплатно) - 1 шт.
-							</span>
+						<div class="card_items_intro">
+              {{ bouquet.composition | safe }}
 						</div>
 					</div>
+
 					<div class="card__elems ">
 						<span class="card__elems_intro">Размер</span>
-						<div class="card__items">
-							<span class="card_items_intro">
-								Высота - 50 см
-							</span>
-							<span class="card_items_intro">
-								Ширина - 30 см
-							</span>
+						<div class="card_items_intro">
+              {{ bouquet.size | safe }}
 						</div>
 					</div>
 					<button class="btn largeBtn card__btn">Заказать букет</button>
