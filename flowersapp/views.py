@@ -114,8 +114,11 @@ def get_quiz_results(request):
 @csrf_exempt
 def result(request):
     result = get_quiz_results(request)
-    bouquet_quiz = BouquetQuiz.objects.get(
+    bouquet_quiz = BouquetQuiz.objects.filter(
         answer_event=result['event'],
         answer_price=result['price'])
 
-    return render(request, 'result.html', context={"bouquet": bouquet_quiz.bouquet})
+    if not bouquet_quiz:
+        bouquet_quiz = BouquetQuiz.objects.all()
+
+    return render(request, 'result.html', context={"bouquet": bouquet_quiz[0].bouquet})
