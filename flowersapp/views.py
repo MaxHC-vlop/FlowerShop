@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
 
 from flowersapp.bot import tg_send_message
-from flowersapp.models import Bouquet, BouquetQuiz, Buyer
+from flowersapp.models import Bouquet, BouquetQuiz, Buyer, Shop
 from flowersapp.models import Consultation, Order, Payment
 
 
@@ -14,8 +14,12 @@ KRASNOYARSK_CENTER = [56.010569, 92.852572]
 def index(request):
 
     folium_map = folium.Map(location=KRASNOYARSK_CENTER, zoom_start=12)
+    site_map =folium_map._repr_html_()
+    site_map = site_map[:90] + '80.5' + site_map[92:]    
 
     recommended_bouquets = Bouquet.objects.filter(recommend=True)
+
+    working_shops = Shop.objects.filter(is_working=True)
 
     if request.method == 'POST':
         full_name = request.POST.get('fname')
@@ -34,8 +38,9 @@ def index(request):
 
     return render(
         request, 'index.html', context={
-            'map': folium_map._repr_html_(),
-            'bouquets': recommended_bouquets
+            'map': site_map,
+            'bouquets': recommended_bouquets,
+            'shops': working_shops,
             },
     )
 
