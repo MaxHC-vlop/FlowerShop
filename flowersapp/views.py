@@ -8,18 +8,42 @@ from flowersapp.models import Consultation, Order, Payment
 
 
 KRASNOYARSK_CENTER = [56.010569, 92.852572]
+DEFAULT_IMAGE_URL = (
+    'https://media.istockphoto.com/id/182838201/ru/%D1%84%D0%BE%D1%82%D0%BE/daisy-%'
+    'D0%BD%D0%B0-%D0%B1%D0%B5%D0%BB%D0%BE%D0%BC-%D1%81-%D0%BE%D0%B1%D1'
+    '%82%D1%80%D0%B0%D0%B2%D0%BA%D0%B0.jpg?s=612x612&w=0&k=20&c=R6tOX'
+    'pmIYQ_LLw4H8cju_ObMFefEjJlB9p2XCPA0Z3k='
+)
 
+def add_shop_on_map(folium_map, lat, lng, adress, image_url=DEFAULT_IMAGE_URL):
+    icon = folium.features.CustomIcon(
+        image_url,
+        icon_size=(20, 20),
+    )
+    folium.Marker(
+        [lng, lat],
+        icon=icon,
+        popup=adress,
+    ).add_to(folium_map)    
 
 @csrf_exempt
 def index(request):
 
-    folium_map = folium.Map(location=KRASNOYARSK_CENTER, zoom_start=12)
-    site_map =folium_map._repr_html_()
-    site_map = site_map[:90] + '80.5' + site_map[92:]    
+    folium_map = folium.Map(location=KRASNOYARSK_CENTER, zoom_start=11)
 
     recommended_bouquets = Bouquet.objects.filter(recommend=True)
 
     working_shops = Shop.objects.filter(is_working=True)
+
+    for working_shop in working_shops:
+        add_shop_on_map(
+                folium_map, 
+                working_shop.lat,
+                working_shop.lng,
+                working_shop.address,
+            )    
+    site_map =folium_map._repr_html_()
+    site_map = site_map[:90] + '80.5' + site_map[92:]
 
     if request.method == 'POST':
         full_name = request.POST.get('fname')
