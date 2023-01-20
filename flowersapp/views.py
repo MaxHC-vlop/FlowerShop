@@ -68,7 +68,7 @@ def order(request, slug):
         address = request.POST.get('adres')
         delivery_time = request.POST.get('orderTime')
 
-        bouquet, created = Bouquet.objects.get_or_create(id=slug)
+        bouquet = Bouquet.objects.get(id=slug)
         buyer, created = Buyer.objects.get_or_create(
             phonenumber=phonenumber,
             defaults={
@@ -82,10 +82,15 @@ def order(request, slug):
             price=bouquet.price,
             address=address
         )
+
+        return render(request, 'order-step.html')
+
     return render(request, 'order.html')
 
 
+@csrf_exempt
 def order_step(request):
+    print(request)
     return render(request, 'order-step.html')
 
 
