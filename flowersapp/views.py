@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from flowersapp.bot import tg_send_message
 from flowersapp.models import Bouquet, BouquetQuiz, Buyer
-from flowersapp.models import Consultation, Order
+from flowersapp.models import Consultation, Order, Payment
 
 
 KRASNOYARSK_CENTER = [56.010569, 92.852572]
@@ -78,22 +78,41 @@ def order(request, slug):
         address = request.POST.get('adres')
         delivery_time = request.POST.get('orderTime')
 
+        сard_number = request.POST.get('cardNum')
+        month = request.POST.get('cardMm')
+        year = request.POST.get('cardGg')
+        owner_name = request.POST.get('cardFname')
+        cvv = request.POST.get('cardCvc')
+        email = request.POST.get('mail')
+
+        payment, created = Payment.objects.get_or_create(
+            сard_number=сard_number,
+            defaults={
+                'owner_name': owner_name,
+                'month': month,
+                'year': year,
+                'cvv': cvv
+            }
+        )
+
         bouquet = Bouquet.objects.get(id=slug)
         buyer, created = Buyer.objects.get_or_create(
             phonenumber=phonenumber,
             defaults={
-                'full_name': full_name
+                'full_name': full_name,
+                'email': email,
+                'payment': payment
             },
         )
+
         Order.objects.create(
             buyer=buyer,
             delivery_time=delivery_time,
             bouquet=bouquet,
             price=bouquet.price,
-            address=address
+            address=address,
+            payment=payment
         )
-
-        return render(request, 'order-step.html')
 
     return render(request, 'order.html')
 

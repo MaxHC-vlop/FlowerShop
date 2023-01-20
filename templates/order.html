@@ -21,6 +21,23 @@ document.querySelector('input[type=radio]').onclick = function(e) {
 								<input type="text" name="tel" class="order__form_input" placeholder="+ 7 (999) 000 00 00" required>
 								<input type="text" name="adres" class="order__form_input" placeholder="Адрес доставки" required>
 							</div>
+							<div class="order__form_block">
+								<div class="order__form_items">
+									<div class="order__form_intro">номер карты</div>
+									<input type="text" name="cardNum" class="order__form_input orderStep_form_input" placeholder="Введите номер" required>
+									<div class="order__form_item fic">
+										<input type="text" name="cardMm" class="order__form_input orderStep_form_input" placeholder="ММ" required>
+										<input type="text" name="cardGg" class="order__form_input orderStep_form_input" placeholder="ГГ" required>
+									</div>
+									
+									<input type="text" name="cardFname" class="order__form_input orderStep_form_input" placeholder="Имя владельца" required>
+									<input type="text" name="cardCvc" class="order__form_input orderStep_form_input" placeholder="CVC" required>
+								</div>
+								<div class="order__form_items">
+									<div class="order__form_intro">Ваш e-mail (необязательно)</div>
+									<input type="email" name="mail" class="order__form_input orderStep_form_input" placeholder="pochta@mail.ru">
+								</div>
+							</div>
 							<div class="order__form_btns fic">
 								<div class="order__form_radioBlock ">
 									<input type="radio" name="orderTime" id="radio1" value="Как можно скорее" class="order__form_radio" />
