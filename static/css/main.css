@@ -541,9 +541,10 @@ height: 57px;
 	position: relative;
 }
 .order__block {
-	height: 775px;
+	height: 100%;
 	display: flex;
 	justify-content: space-between;
+	padding-bottom: 30px;
 }
 .order_items {
 	width: 740px;
