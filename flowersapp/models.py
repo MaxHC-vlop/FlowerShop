@@ -7,14 +7,22 @@ class Payment(models.Model):
         max_length=200,
         db_index=True
     )
-    card_date = models.DateField(
-        'Срок годности карты',
-        db_index=True
-    )
     owner_name = models.CharField(
         'Имя и фамилия владельца',
         max_length=200,
         db_index=True
+    )
+    month = models.CharField(
+        'Месяц конца работы карты',
+        max_length=2,
+        db_index=True,
+        null=True
+    )
+    year = models.CharField(
+        'Год конца работы карты',
+        max_length=2,
+        db_index=True,
+        null=True
     )
     cvv = models.IntegerField(
         'CVV карты',
@@ -219,7 +227,8 @@ class Order(models.Model):
     address = models.TextField(
         'Адрес доставки',
         blank=True,
-        db_index=True
+        db_index=True,
+        null=True
     )
 
     def __str__(self) -> str:
@@ -242,11 +251,13 @@ class BouquetQuiz(models.Model):
         max_length=255,
         null=True
     )
+    bouquet = models.ForeignKey(
+        Bouquet,
+        on_delete=models.CASCADE,
+        related_name='bouquet',
+        verbose_name='букет'
+    )
 
-    bouquet = models.ForeignKey(Bouquet,
-                                on_delete=models.CASCADE,
-                                related_name='bouquet',
-                                verbose_name='букет')
     class Meta:
         verbose_name = 'Подобранный букет'
         verbose_name_plural = 'Подобранные букеты'
