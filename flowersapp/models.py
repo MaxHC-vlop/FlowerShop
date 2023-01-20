@@ -104,6 +104,7 @@ class Shop(models.Model):
         upload_to='images',
         db_index=True,
         null=True,
+        blank=True,
     )
     address = models.TextField(
         'Адрес Магазина',
