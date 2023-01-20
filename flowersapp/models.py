@@ -122,6 +122,14 @@ class Shop(models.Model):
         'Работает ли магазин',
         db_index=True
     )
+    phonenumber = models.CharField(
+        'Номер телефона магазина',
+        max_length=20,
+        db_index=True,
+        default= '+79999999999'
+    )    
+    lng = models.FloatField('Долгота', default= 56.010569)
+    lat = models.FloatField('Широта', default= 92.852572)    
 
     def __str__(self) -> str:
         return self.shop_name
