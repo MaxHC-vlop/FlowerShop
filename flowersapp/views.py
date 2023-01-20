@@ -1,3 +1,4 @@
+import folium
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
 
@@ -6,8 +7,14 @@ from flowersapp.models import Bouquet, BouquetQuiz, Buyer
 from flowersapp.models import Consultation, Order
 
 
+KRASNOYARSK_CENTER = [56.010569, 92.852572]
+
+
 @csrf_exempt
 def index(request):
+
+    folium_map = folium.Map(location=KRASNOYARSK_CENTER, zoom_start=12)
+
     recommended_bouquets = Bouquet.objects.filter(recommend=True)
 
     if request.method == 'POST':
@@ -26,7 +33,10 @@ def index(request):
         tg_send_message(full_name, phonenumber)
 
     return render(
-        request, 'index.html', context={'bouquets': recommended_bouquets}
+        request, 'index.html', context={
+            'map': folium_map._repr_html_(),
+            'bouquets': recommended_bouquets
+            },
     )
 
 
