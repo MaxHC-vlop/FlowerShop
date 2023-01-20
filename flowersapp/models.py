@@ -102,7 +102,8 @@ class Shop(models.Model):
     store_photo = models.ImageField(
         'Фото магазина',
         upload_to='images',
-        db_index=True
+        db_index=True,
+        null=True,
     )
     address = models.TextField(
         'Адрес Магазина',
