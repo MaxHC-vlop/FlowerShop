@@ -1,13 +1,20 @@
+import folium
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
 
-from flowersapp.models import Bouquet, Buyer
-from flowersapp.models import Consultation, Order
 from flowersapp.bot import tg_send_message
+from flowersapp.models import Bouquet, BouquetQuiz, Buyer
+from flowersapp.models import Consultation, Order
+
+
+KRASNOYARSK_CENTER = [56.010569, 92.852572]
 
 
 @csrf_exempt
 def index(request):
+
+    folium_map = folium.Map(location=KRASNOYARSK_CENTER, zoom_start=12)
+
     recommended_bouquets = Bouquet.objects.filter(recommend=True)
 
     if request.method == 'POST':
@@ -26,8 +33,11 @@ def index(request):
         tg_send_message(full_name, phonenumber)
 
     return render(
-        request, 'index.html', context={'bouquets': recommended_bouquets}
-        )
+        request, 'index.html', context={
+            'map': folium_map._repr_html_(),
+            'bouquets': recommended_bouquets
+            },
+    )
 
 
 def card(request, bouquet_url):
@@ -94,13 +104,36 @@ def order_step(request):
     return render(request, 'order-step.html')
 
 
+@csrf_exempt
 def quiz(request):
     return render(request, 'quiz.html')
 
 
+@csrf_exempt
 def quiz_step(request):
     return render(request, 'quiz-step.html')
 
 
+def get_quiz_results(request):
+    if request.method == 'GET':
+        price = request.GET.get('price')
+        request_prev = request.META.get('HTTP_REFERER')
+        _, event = request_prev.split('?')
+        _, event_value = event.split('=')
+        return {
+            'event': event_value,
+            'price': price
+        }
+
+
+@csrf_exempt
 def result(request):
-    return render(request, 'result.html')
+    result = get_quiz_results(request)
+    bouquet_quiz = BouquetQuiz.objects.filter(
+        answer_event=result['event'],
+        answer_price=result['price'])
+
+    if not bouquet_quiz:
+        bouquet_quiz = BouquetQuiz.objects.all()
+
+    return render(request, 'result.html', context={"bouquet": bouquet_quiz[0].bouquet})

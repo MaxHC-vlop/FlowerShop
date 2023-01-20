@@ -228,3 +228,27 @@ class Order(models.Model):
     class Meta:
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
+
+
+class BouquetQuiz(models.Model):
+    answer_event = models.CharField(
+        'ответ событие',
+        max_length=255,
+        null=True
+    )
+    answer_price = models.CharField(
+        'ответ стоимость',
+        max_length=255,
+        null=True
+    )
+
+    bouquet = models.ForeignKey(Bouquet,
+                                on_delete=models.CASCADE,
+                                related_name='bouquet',
+                                verbose_name='букет')
+    class Meta:
+        verbose_name = 'Подобранный букет'
+        verbose_name_plural = 'Подобранные букеты'
+
+    def __str__(self) -> str:
+        return f'event: {self.answer_event}, price: {self.answer_price}'

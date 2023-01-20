@@ -1,89 +1,87 @@
 {% extends 'base.html' %}
 {% block content %}
-{% load static %}
+  {% load static %}
 
-	<section id="result">
-		<div class="container">
-			<div class="result p100">
-				<div class="title">Мы подобрали специально для Вас</div>
-				<div class="result__block ficb">
-					<div class="result__elems">
-						<div class="card__elems ">
-							<span class="card__elems_intro">Описание:</span>
-							<div class="card__items">
-								<p class="card__items_text card__items_text__first">
-									Этот букет передает атмосферу летнего утра в деревне. Букет создан из свежих полевых цветов, собранных в самом сердце природы. В состав букета входит ромашка, пионовидная роза, альстромерия, эустома, веточка эвкалипта, декоративная зелень. Все цветы собраны вручную и аккуратно высушены. 
-								</p>
-								<p class="card__items_text">
-									Букеты из полевых цветов - это не только прекрасный подарок, но и отличный способ выразить свои чувства.
-								</p>
-							</div>
-						</div>
-						<div class="card__elems ">
-							<span class="card__elems_intro">Состав:</span>
-							<div class="card__items">
-								<p class="card__items_text card__items_text__first">
-									Альстромерия белая 1 шт., Эустома белая 1 шт, Ромашка 1 шт, Роза пионовидная 1 шт 
-								</p>
-								
-							</div>
-						</div>
-					</div>
-					<img src="{% static 'img/cardImg.jpg' %}" alt="result Img" class="result__block_img">
-					<div class="result__items">
-						<div class="title result__items_title">Летнее утро</div>
-						<div class="result__items_price">3 600 руб</div>
-						<button class="btn result__items_btn">Заказать букет</button>
-						<hr class="result__items_line" />
-						<div class="result__items_intro">Хотите что-то более специальное?</div>
-						<div class="result__items_block">
-							<button class="btn largeBtn result__items_block__btn">Смотреть всю коллекцию</button>
-							<button class="btn largeBtn result__items_block__btn">Заказать консультацию</button>
-						</div>
-					</div>
-				</div>	
-			</div>
-		</div>
-	</section>
-	<section id="contacts">
-		<div class="container">
-			<div class="contacts">
-				<div class="title">Как нас найти</div>
-				<div class="contacts__elems ficb">
-					<div class="contacts__block">
-						<div class="contacts__block_item ficc">
-							<div class="contacts__block_intro">ул. Пушкинская, 69</div>
-							<a href="tel:89111744460" class="contacts__block_tel">8 (911) 17 44 460</a>
-						</div>
-						<div class="contacts__block_item ficc">
-							<div class="contacts__block_intro">ул. Пушкинская, 69</div>
-							<a href="tel:89111744460" class="contacts__block_tel">8 (911) 17 44 460</a>
-						</div>
-						<div class="contacts__block_item ficc">
-							<div class="contacts__block_intro">ул. Пушкинская, 69</div>
-							<a href="tel:89111744460" class="contacts__block_tel">8 (911) 17 44 460</a>
-						</div>
-					</div>
-					<img src="{% static 'img/contactsImg.jpg' %}" alt="contactsImg" class="contacts__img">
-					<div class="contacts__map">
-						<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Af39d7a7f1829359b6ffe21ab6356fcaeace17d528d6522dba8772f885c8b1a7d&amp;width=398&amp;height=316&amp;lang=ru_RU&amp;scroll=true"></script>
-					</div>					
-				</div>
-				<button class="btn contacts__btn">Заказать доставку</button>
-			</div>
-		</div>
-	</section>
-	<section id="consultation">
-		<div class="container">
-			<div class="consultation">
-				<div class="title consultation__title">Оставьте заявку на консультацию</div>
-				<form action="#" class="consultation__form">
-					<input type="text" name="fname" class="consultation__form_input" placeholder="Введите Имя" required>
-					<input type="text" name="tel" class="consultation__form_input" placeholder="+ 7 (999) 000 00 00" required>
-					<button type="submit" class="consultation__form_btn">Отправить</button>
-				</form>
-			</div>
-		</div>
-	</section>
-	
+  <section id="result">
+    <div class="container">
+      <div class="result p100">
+        <div class="title">Мы подобрали специально для Вас</div>
+        <div class="result__block ficb">
+          <div class="result__elems">
+            <div class="card__elems ">
+              <span class="card__elems_intro">Описание:</span>
+              <div class="card__items">
+                {{ bouquet.description  | safe }}
+              </div>
+            </div>
+            <div class="card__elems ">
+              <span class="card__elems_intro">Состав:</span>
+              <div class="card__items">
+                <p class="card__items_text card__items_text__first">
+                  {{ bouquet.composition | safe }}
+                </p>
+
+              </div>
+            </div>
+          </div>
+          <img src="{% get_media_prefix %}{{ bouquet.bouquet_photo }}" alt="result Img" class="result__block_img">
+          <div class="result__items">
+            <div class="title result__items_title">{{ bouquet.bouquet_name }}</div>
+            <div class="result__items_price">{{ bouquet.price }} руб</div>
+            <form action="{% url 'order' slug=bouquet.id %}">
+              <button class="btn result__items_btn">Заказать букет</button>
+            </form>
+            <hr class="result__items_line"/>
+            <div class="result__items_intro">Хотите что-то более специальное?</div>
+            <div class="result__items_block">
+              <button class="btn largeBtn result__items_block__btn">Смотреть всю коллекцию</button>
+              <button class="btn largeBtn result__items_block__btn">Заказать консультацию</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="contacts">
+    <div class="container">
+      <div class="contacts">
+        <div class="title">Как нас найти</div>
+        <div class="contacts__elems ficb">
+          <div class="contacts__block">
+            <div class="contacts__block_item ficc">
+              <div class="contacts__block_intro">ул. Пушкинская, 69</div>
+              <a href="tel:89111744460" class="contacts__block_tel">8 (911) 17 44 460</a>
+            </div>
+            <div class="contacts__block_item ficc">
+              <div class="contacts__block_intro">ул. Пушкинская, 69</div>
+              <a href="tel:89111744460" class="contacts__block_tel">8 (911) 17 44 460</a>
+            </div>
+            <div class="contacts__block_item ficc">
+              <div class="contacts__block_intro">ул. Пушкинская, 69</div>
+              <a href="tel:89111744460" class="contacts__block_tel">8 (911) 17 44 460</a>
+            </div>
+          </div>
+          <img src="{% static 'img/contactsImg.jpg' %}" alt="contactsImg" class="contacts__img">
+          <div class="contacts__map">
+            <script type="text/javascript" charset="utf-8" async
+                    src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Af39d7a7f1829359b6ffe21ab6356fcaeace17d528d6522dba8772f885c8b1a7d&amp;width=398&amp;height=316&amp;lang=ru_RU&amp;scroll=true"></script>
+          </div>
+        </div>
+        <button class="btn contacts__btn">Заказать доставку</button>
+      </div>
+    </div>
+  </section>
+  <section id="consultation">
+    <div class="container">
+      <div class="consultation">
+        <div class="title consultation__title">Оставьте заявку на консультацию</div>
+        <form action="#" class="consultation__form">
+          <input type="text" name="fname" class="consultation__form_input" placeholder="Введите Имя" required>
+          <input type="text" name="tel" class="consultation__form_input" placeholder="+ 7 (999) 000 00 00" required>
+          <button type="submit" class="consultation__form_btn">Отправить</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
 {% endblock %}
