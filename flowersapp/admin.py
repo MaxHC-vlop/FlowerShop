@@ -23,9 +23,13 @@ class ShopAdminModel(admin.ModelAdmin):
 
 @admin.register(Bouquet)
 class BouquetAdminModel(admin.ModelAdmin):
+
     prepopulated_fields = {"slug": ("bouquet_name",)}
 
     readonly_fields = ["bouquet_image", ]
+
+    list_display = ("bouquet_name", "size", "bouquet_image", "price")
+    list_filter = ("size", "price")
 
     def bouquet_image(self, bouquet_image):
         return format_html(
@@ -38,7 +42,7 @@ class BouquetAdminModel(admin.ModelAdmin):
 @admin.register(Order)
 class OrderAdminModel(admin.ModelAdmin):
     readonly_fields = ["bouquet_image", ]
-
+    list_filter = ("delivery_time", "is_active")
     def bouquet_image(self, bouquet_image):
         return format_html(
             '<img src="/media/{}" height=200px width=auto />', bouquet_image.bouquet.bouquet_photo
