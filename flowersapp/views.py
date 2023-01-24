@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from flowersapp.bot import tg_send_message
 from flowersapp.models import Bouquet, BouquetQuiz, Buyer, Shop
 from flowersapp.models import Consultation, Order, Payment
+from .forms import UserRegistrationForm
 
 
 KRASNOYARSK_CENTER = [56.010569, 92.852572]
@@ -185,3 +186,16 @@ def result(request):
         bouquet_quiz = BouquetQuiz.objects.all()
 
     return render(request, 'result.html', context={"bouquet": bouquet_quiz[0].bouquet})
+
+
+def register(request):
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            new_user = user_form.save(commit=False)
+            new_user.set_password(user_form.cleaned_data['password'])
+            new_user.save()
+            return render(request, 'register_done.html', {'new_user': new_user})
+    else:
+        user_form = UserRegistrationForm()
+    return render(request, 'register.html', {'user_form': user_form})
